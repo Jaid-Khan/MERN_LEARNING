@@ -1,0 +1,58 @@
+01 - React + Vite Installing and Setup
+
+Purpose:
+This folder contains the initial setup of a React project using Vite for a fast development environment.
+The goal is to understand how to install React properly, structure files, and run the project locally.
+
+Steps Followed:
+
+Create a React project using Vite
+Command: npm create vite@latest my-react-app
+
+Select framework
+Choose: React
+Variant: JavaScript (or TypeScript if preferred)
+
+Go inside the project folder
+Command: cd my-react-app
+
+Install dependencies
+Command: npm install
+
+Run the development server
+Command: npm run dev
+
+Open the app in the browser
+Use the URL shown in terminal, e.g. http://localhost:5173/
+
+Concepts Learned:
+
+What is Vite and why it’s faster than Create React App (CRA)
+
+Understanding React project folder structure
+
+Role of key files:
+• main.jsx → Entry point of the React app
+• App.jsx → Root component
+• index.html → HTML template
+
+Using npm and npx commands
+
+How the development server works
+
+Files in This Folder:
+
+main.jsx → renders the React app
+
+App.jsx → root component
+
+index.html → main HTML file
+
+package.json → project dependencies and scripts
+
+vite.config.js → Vite configuration file
+
+Output:
+
+Successfully created and ran a new React project with Vite.
+The app runs on local server and displays the default Vite + React starter page.

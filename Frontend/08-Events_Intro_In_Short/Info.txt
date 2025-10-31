@@ -1,0 +1,75 @@
+📘 React Mouse Events Documentation
+
+----------------------------------------
+🧩 Purpose:
+This example demonstrates handling **various mouse events** in React using external functions such as `onClick`, `onDoubleClick`, `onMouseEnter`, and `onMouseLeave`.
+
+----------------------------------------
+📂 File Structure:
+```
+src/
+│
+├── App.jsx
+├── App.css
+└── Functions.js
+```
+
+----------------------------------------
+⚙️ Functions.js Explanation:
+Each function displays an alert message when a specific event occurs.
+
+```js
+export function click() {
+  alert("You Clicked Me !");
+}
+
+export function dbl_Click() {
+  alert("You Double Clicked Me !");
+}
+
+export function mouseEnter() {
+  alert("Mouse Entered");
+}
+
+export function mouseLeave() {
+  alert("Mouse Leaved");
+}
+```
+- `click()` → Triggered on a single click.
+- `dbl_Click()` → Triggered on a double click.
+- `mouseEnter()` → Triggered when mouse enters the button area.
+- `mouseLeave()` → Triggered when mouse leaves the button area.
+
+----------------------------------------
+⚙️ App.jsx Explanation:
+```jsx
+import { click, dbl_Click, mouseEnter, mouseLeave } from "./Functions";
+
+function App() {
+  return (
+    <>
+      <button onClick={click}>Click Me!</button>
+      <button onDoubleClick={dbl_Click}>Double Click Me!</button>
+      <button onMouseEnter={mouseEnter}>Enter Mouse Here</button>
+      <button onMouseLeave={mouseLeave}>Leave Mouse From Here</button>
+    </>
+  );
+}
+```
+- `onClick` → Single click event.
+- `onDoubleClick` → Double click event.
+- `onMouseEnter` → Mouse hover in event.
+- `onMouseLeave` → Mouse hover out event.
+
+----------------------------------------
+✅ Example Output:
+- Clicking the first button → Alert: “You Clicked Me!”
+- Double-clicking the second button → Alert: “You Double Clicked Me!”
+- Hovering over the third button → Alert: “Mouse Entered”
+- Moving away from the fourth button → Alert: “Mouse Leaved”
+
+----------------------------------------
+💡 Notes:
+- React uses **camelCase** for event handlers (e.g., `onClick`, not `onclick`).
+- All functions are imported from an external file to keep code modular and clean.
+- You can reuse these event handler functions across multiple components.

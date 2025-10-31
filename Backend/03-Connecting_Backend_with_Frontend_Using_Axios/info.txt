@@ -1,0 +1,65 @@
+📄 03-Connecting_Frontend_With_Backend (Backend Only).txt
+🧩 Purpose
+
+This backend handles API requests from the React frontend and sends responses using Express.
+It also uses CORS to allow requests from the frontend running on a different port (React → 5173, Backend → 3000).
+
+🧠 Concepts Learned
+
+Express
+
+A minimal Node.js framework for creating servers and APIs.
+
+Simplifies route creation and request handling.
+
+CORS (Cross-Origin Resource Sharing)
+
+Allows requests between different ports or domains.
+
+Required because React (5173) and Express (3000) run separately.
+
+Installed using:
+
+npm install cors
+
+
+Basic Routing
+
+Routes define how the server responds to various URLs (e.g., /, /about, /api).
+
+⚙️ Setup Steps
+
+File: server.js or index.js
+
+const express = require("express");
+const server = express();
+const cors = require("cors");
+
+// Enable CORS so frontend can access backend
+server.use(cors());
+
+// Create a simple GET route
+server.get("/", (req, res) => {
+  res.send("This is Home");
+});
+
+// Start server on port 3000
+server.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});
+
+🚀 How It Works
+
+The backend listens on http://localhost:3000
+
+When the frontend sends a request using Axios:
+
+axios.get("http://localhost:3000/")
+
+
+The backend responds with:
+
+This is Home
+
+
+Verified connection → Data visible in frontend console.

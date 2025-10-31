@@ -1,0 +1,81 @@
+
+📘 React Counter App Documentation
+==================================
+
+### Overview
+This React component demonstrates how to use the `useState` hook to create a simple counter app that can increment and decrement a number displayed on the screen.
+
+---
+
+### 1️⃣ Import Statements
+- **useState (from React):**  
+  Used to handle the state (data that changes) within a functional component.
+- **App.css:**  
+  Contains external CSS styling for the app.
+
+---
+
+### 2️⃣ useState Declaration
+```js
+const [count, setCount] = useState(0);
+```
+- `count` → stores the current counter value (initially 0).  
+- `setCount` → updates the counter value.
+
+---
+
+### 3️⃣ Auto Increment Example (Commented)
+```js
+setTimeout(() => {
+  setCount(count + 1);
+}, 1000);
+```
+- This snippet would auto-increment the count every second.
+- It’s commented out to prevent infinite re-renders.
+
+---
+
+### 4️⃣ Increment Function
+```js
+const increment = () => {
+  setCount(count + 1);
+};
+```
+- Increases the counter value by 1 each time the button is clicked.
+
+---
+
+### 5️⃣ Decrement Function
+```js
+const decrement = () => {
+  count > 0 ? setCount(count - 1) : setCount(0);
+};
+```
+- Decreases the counter value by 1 if it’s above 0.
+- Prevents negative values (counter stops at 0).
+
+---
+
+### 6️⃣ JSX Return
+```jsx
+<h1>Count: {count}</h1>
+<button onClick={increment}>Increment</button>
+<button onClick={decrement}>Decrement</button>
+```
+- Displays the count value.
+- Buttons trigger the increment/decrement functions using `onClick` events.
+
+---
+
+### 7️⃣ Export Statement
+```js
+export default App;
+```
+- Makes the `App` component available to be imported and used in `main.jsx` (React entry file).
+
+---
+
+### 🧠 Key Learning Points
+- Learn how `useState` enables dynamic updates in UI.
+- Understand event handling via `onClick`.
+- Practice conditional logic to prevent invalid state (negative values).

@@ -1,0 +1,102 @@
+React Axios Example - Documentation
+=================================
+
+📘 Overview
+------------
+This React component demonstrates how to fetch data from a backend API using **Axios** and display it on the page. 
+It also uses the **useState** hook for managing the response data.
+
+---
+
+🧩 1. Imports
+--------------
+- `useState`: React hook for managing state within the component.
+- `axios`: Library used to make HTTP requests to the backend.
+- `./App.css`: External stylesheet for styling.
+
+```js
+import { useState } from 'react'
+import axios from "axios"
+import './App.css'
+```
+
+---
+
+⚙️ 2. State Declaration
+------------------------
+The `useState` hook initializes the variable `a` to store the student data received from the API.
+
+```js
+const [a, setA] = useState("");
+```
+- `a` → holds the student object (name, age, course, gender)
+- `setA` → function to update the value of `a`
+
+---
+
+🌐 3. Fetching Data with Axios
+-------------------------------
+Axios is used to send a **GET request** to the backend server.
+
+```js
+axios.get("http://localhost:3000/students?s=ankit").then((res) => {
+  console.log(res.data);  // logs response data in console
+  setA(res.data);         // stores data in state
+});
+```
+
+### ⚠️ Important Note:
+This request should be placed inside a **useEffect()** hook to avoid infinite loops, since `axios.get()` runs on every re-render.
+
+Example (Best Practice):
+```js
+useEffect(() => {
+  axios.get("http://localhost:3000/students?s=ankit")
+       .then((res) => setA(res.data));
+}, []);
+```
+
+---
+
+🧠 4. Rendering Data
+---------------------
+The returned JSX displays the student details fetched from the API.
+
+```jsx
+<h3>Name: {a.name}</h3>
+<h3>Age: {a.age}</h3>
+<h3>Course: {a.course}</h3>
+<h3>Gender: {a.gender}</h3>
+```
+
+Each line dynamically displays data based on the API response stored in `a`.
+
+---
+
+🎨 5. Example Output
+---------------------
+```
+Name: Ankit
+Age: 20
+Course: B.Tech
+Gender: Male
+```
+
+---
+
+🚀 6. Key Concepts
+-------------------
+- **useState** → Manages and updates component data.
+- **Axios** → Handles HTTP requests.
+- **JSX** → Renders dynamic data in HTML-like syntax.
+- **API Integration** → Demonstrates how frontend connects to backend.
+
+---
+
+📦 7. Export
+-------------
+The component is exported as default so it can be imported into `index.js` and rendered in the app.
+
+```js
+export default App;
+```

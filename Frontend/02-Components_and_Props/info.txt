@@ -1,0 +1,99 @@
+02 - Components and Props
+
+Purpose:
+This folder covers the concept of React Components and Props.
+It explains how to create reusable components, pass data between them, and use props destructuring or children props.
+
+Concepts Learned:
+
+Components:
+
+Functional Components are simple JavaScript functions that return JSX.
+
+They help in breaking the UI into reusable, independent pieces.
+
+Props (Properties):
+
+Props are used to pass data from a parent component to a child component.
+
+Props are read-only, meaning the child component cannot modify them.
+
+Example: <Card name="Tony" age="20" gender="Male" />
+
+Props Destructuring:
+
+Instead of writing props.name, props.age, props.gender,
+we can directly destructure props in the function parameters.
+
+Example: function Card({ name, age, gender }) {}
+
+Children Prop:
+
+Anything written between <Card> ... </Card> is available as props.children.
+
+Example: <Card>This is a Card.</Card>
+
+Inside the component, it can be used as {children}.
+
+Files in This Folder:
+
+Card.jsx
+Location: Frontend\02-Components_and_Props\src\components\Card.jsx
+Description:
+
+A functional component that receives props (name, age, gender).
+
+Demonstrates props destructuring.
+
+Includes a commented section showing how to use children props.
+
+Code Summary:
+function Card({ name, age, gender }) {
+return (
+<>
+<div>{name}</div>
+<div>{age}</div>
+<div>{gender}</div>
+</>
+);
+}
+
+App.jsx
+Location: Frontend\02-Components_and_Props\src\App.jsx
+Description:
+
+Parent component that imports and renders the Card component.
+
+Demonstrates how to pass props and children to a component.
+
+Code Summary:
+<Card name="Tony" age="20" gender="Male" />
+<Card name="Hulk" age="19" gender="Male" />
+{/* Example of passing children: <Card>This Is a Card.</Card> */}
+
+Commands Used:
+
+npm run dev → to start the development server and view results in browser.
+
+Output:
+
+The app displays two cards showing:
+Tony
+20
+Male
+and
+Hulk
+19
+Male
+
+Props and destructuring concepts verified successfully.
+
+Notes:
+
+Props allow parent-to-child communication.
+
+Destructuring keeps code short and readable.
+
+Children prop is useful when you want to pass inner content dynamically.
+
+This folder demonstrates the foundation for more complex React data flow (State, Context, etc.).

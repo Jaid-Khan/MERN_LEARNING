@@ -1,0 +1,52 @@
+React / JavaScript Documentation: Using map() Method
+
+----------------------------------------
+📘 Purpose:
+The map() method in JavaScript is used to iterate over an array and apply a given function to each element. 
+It returns a **new array** with the results of applying that function to every item.
+
+----------------------------------------
+🧩 Code Explanation:
+
+1. **Array Declaration:**
+   ```js
+   let arr = ["Tony", "Captain", "Hulk", "Thor"];
+   ```
+   - Creates an array named `arr` with four elements (strings).
+
+2. **map() Method:**
+   ```js
+   arr.map((item, index) => { ... });
+   ```
+   - `map()` loops through each item in the array.
+   - The callback function receives:
+     - `item` → current value in the array.
+     - `index` → position of the current element.
+
+3. **console.log Output:**
+   ```js
+   console.log(item, index);
+   ```
+   - Prints each element with its index.
+   - Output:
+     ```
+     Tony 0
+     Captain 1
+     Hulk 2
+     Thor 3
+     ```
+
+----------------------------------------
+💡 Key Notes:
+- `map()` doesn’t change the original array.
+- It’s often used in **React** for rendering lists dynamically, like rendering a list of components.
+- If you only need to perform an action (like logging), `forEach()` is preferred since `map()` is used to produce new arrays.
+
+----------------------------------------
+✅ Example in React:
+```jsx
+{arr.map((hero, index) => (
+  <h2 key={index}>{hero}</h2>
+))}
+```
+This will display each hero name inside an `<h2>` tag.

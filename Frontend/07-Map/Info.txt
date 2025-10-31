@@ -1,0 +1,108 @@
+React Table Component - Documentation
+=================================
+
+📘 Overview
+------------
+This React component demonstrates how to dynamically render a table using an array of JavaScript objects. 
+It uses the `useState` hook to manage the data and JSX to create the table structure.
+
+---
+
+🧩 1. Imports
+--------------
+- `useState` is imported from React to manage state variables.
+- `./App.css` is imported for external styling (optional).
+
+```js
+import { useState } from "react";
+import "./App.css";
+```
+
+---
+
+⚙️ 2. useState Hook
+--------------------
+The `useState` hook initializes a state variable called `arr` that holds an array of hero objects.
+Each object represents a hero with the properties `name`, `age`, and `gender`.
+
+```js
+const [arr, newArr] = useState([
+  { name: "Tony", age: 27, gender: "male" },
+  { name: "Captain America", age: 27, gender: "male" },
+  { name: "Hulk", age: 28, gender: "male" },
+  { name: "Thor", age: 26, gender: "male" },
+]);
+```
+
+- `arr`: current state value (array of heroes)
+- `newArr`: function to update the array (currently unused)
+
+---
+
+🧠 3. JSX Return Structure
+---------------------------
+The component returns a fragment (`<> </>`) that contains a table.
+
+### 🧱 Table Structure
+- `<thead>` → contains the table headers
+- `<tbody>` → contains all table rows
+
+```jsx
+<table border={2} width={500}>
+  <thead>
+    <tr>
+      {Object.keys(arr[0]).map((key, index) => (
+        <th key={index}>{key}</th>
+      ))}
+    </tr>
+  </thead>
+  <tbody>
+    {arr.map((value, i) => (
+      <tr key={i}>
+        {Object.values(value).map((val, j) => (
+          <td key={j}>{val}</td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>
+```
+
+---
+
+🔍 4. Logic Explanation
+------------------------
+- `Object.keys(arr[0])`: extracts property names (e.g. `["name", "age", "gender"]`) for table headers.
+- `arr.map(...)`: loops through each object in the array to create a row (`<tr>`).
+- `Object.values(value)`: extracts property values (e.g. `["Tony", 27, "male"]`) for table cells (`<td>`).
+- `key={index}`: provides a unique key to each element to prevent React warnings.
+
+---
+
+🎨 5. Output Example
+---------------------
+| name             | age | gender |
+|------------------|-----|--------|
+| Tony             | 27  | male   |
+| Captain America  | 27  | male   |
+| Hulk             | 28  | male   |
+| Thor             | 26  | male   |
+
+---
+
+🚀 6. Notes
+------------
+- This approach works for any array of objects with consistent keys.
+- You can easily update or filter data using `newArr()`.
+- Use `<thead>` and `<tbody>` for better structure and readability.
+- The table is responsive and automatically adjusts based on data.
+
+---
+
+📦 7. Export
+-------------
+The component is exported as default for use in other parts of the app.
+
+```js
+export default App;
+```

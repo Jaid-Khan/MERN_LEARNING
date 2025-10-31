@@ -1,0 +1,109 @@
+React Conditional Rendering Example - Documentation
+=================================================
+
+📘 Overview
+------------
+This React component demonstrates **conditional rendering** using the `useState` hook and a simple login/logout toggle.
+
+---
+
+🧩 1. Imports
+--------------
+- `useState`: React hook used to manage component state.
+- `./App.css`: External CSS file for styling.
+- `Component`: Imported from React but not used here (for class-based components).
+
+```js
+import { useState } from "react";
+import "./App.css";
+import { Component } from "react";
+```
+
+---
+
+⚙️ 2. useState Hooks
+----------------------
+Two state variables are declared:
+
+```js
+const [isloggedIn, setIsLoggedIn] = useState(false);
+const [box, setBox] = useState(true);
+```
+
+- **isloggedIn** → Controls whether the user is logged in or not.
+- **box** → Used to demonstrate state change after a timeout.
+
+---
+
+⏱️ 3. Timeout Function
+-----------------------
+The `setTimeout()` function runs once after 3 seconds, printing a message and changing the `box` state.
+
+```js
+setTimeout(() => {
+  console.log("rendered");
+  setBox(false);
+}, 3000);
+```
+
+⚠️ Note: Because this is inside the component body, it executes on every render (causing repeated calls).  
+To fix that, it should ideally be inside a `useEffect()` hook.
+
+---
+
+🧠 4. Conditional Rendering
+----------------------------
+Displays a message depending on login status using the ternary operator:
+
+```jsx
+<h1>{isloggedIn ? "Welcome User !" : "You are Not logged In Please Log In "}</h1>
+```
+
+---
+
+🖱️ 5. Login/Logout Button
+---------------------------
+Toggles login state when clicked:
+
+```jsx
+<button onClick={() => setIsLoggedIn(!isloggedIn)}>
+  {isloggedIn ? "Log Out" : "Log In"}
+</button>
+```
+
+---
+
+🎨 6. Example Output
+---------------------
+**Initial:**
+```
+You are Not logged In Please Log In
+[Log In]
+```
+
+**After Clicking Log In:**
+```
+Welcome User !
+[Log Out]
+```
+
+---
+
+🚀 7. Key Concepts
+-------------------
+- `useState()` → For managing component data.
+- Conditional Rendering → Uses ternary operator to show UI based on state.
+- Event Handling → Uses `onClick` to toggle state.
+- `setTimeout()` → Demonstrates delayed state update.
+
+---
+
+📦 8. Export
+-------------
+The component is exported as default for use in other files.
+
+```js
+export default App;
+```
+
+---

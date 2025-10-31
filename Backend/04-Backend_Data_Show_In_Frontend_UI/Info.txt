@@ -1,0 +1,81 @@
+📘 Node.js Express Server Documentation
+
+----------------------------------------
+🧩 Purpose:
+This code creates a simple Node.js server using the Express framework that responds with student data based on a query parameter.
+
+----------------------------------------
+⚙️ Step-by-Step Explanation:
+
+1. **Importing Modules:**
+   ```js
+   const express = require("express");
+   const cors = require("cors");
+   ```
+   - `express`: Used to create and manage the web server.
+   - `cors`: Enables Cross-Origin Resource Sharing to allow requests from other domains (e.g., frontend apps).
+
+2. **Creating the Server:**
+   ```js
+   const app = express();
+   app.use(cors());
+   ```
+   - Initializes the Express app.
+   - Adds the CORS middleware so APIs can be accessed from the frontend.
+
+3. **Home Route:**
+   ```js
+   app.get("/", (req, res) => {
+       res.send("This is Home Page");
+   });
+   ```
+   - When you visit `http://localhost:3000/`, this sends a simple text message.
+
+4. **Students Route:**
+   ```js
+   app.get("/students", (req, res) => { ... });
+   ```
+   - Handles GET requests made to `/students`.
+
+5. **Students Data:**
+   ```js
+   let students = {
+       ankit: { name: "Ankit", age: 20, gender: "male", course: "Btech" },
+       mohit: { name: "Mohit", age: 23, gender: "male", course: "Mtech" }
+   };
+   ```
+   - A simple object holding two student profiles.
+
+6. **Query Handling:**
+   ```js
+   let s = req.query.s;
+   if (s == "ankit") res.send(students.ankit);
+   else res.send(students.mohit);
+   ```
+   - Reads the query parameter `s` from the URL.
+   - Example:
+     - `http://localhost:3000/students?s=ankit` → returns Ankit’s data.
+     - `http://localhost:3000/students?s=mohit` → returns Mohit’s data.
+
+7. **Start the Server:**
+   ```js
+   app.listen(3000, () => {
+       console.log("Server is listening on port: 3000");
+   });
+   ```
+   - Starts the server on **port 3000**.
+   - Access it via `http://localhost:3000`.
+
+----------------------------------------
+✅ Example URLs:
+- **Home Page:** http://localhost:3000/
+- **Ankit Data:** http://localhost:3000/students?s=ankit
+- **Mohit Data:** http://localhost:3000/students?s=mohit
+
+----------------------------------------
+💡 Notes:
+- Ensure Node.js and Express are installed using:
+  ```bash
+  npm install express cors
+  ```
+- This is a backend API that can connect with a React frontend via Axios or Fetch.

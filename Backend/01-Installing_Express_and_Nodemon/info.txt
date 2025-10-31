@@ -1,0 +1,101 @@
+01 - Installing Express and Nodemon
+
+Purpose:
+This folder explains how to install and set up Express and Nodemon for a Node.js backend project.
+The goal is to create a basic server, understand how Express simplifies routing, and use Nodemon for automatic restarts during development.
+
+Concepts Learned:
+
+Express:
+
+Express is a lightweight and flexible web framework for Node.js.
+
+It helps handle routes, requests, and responses easily.
+
+It’s built on top of Node’s native http module but provides simpler syntax and extra features.
+
+Nodemon:
+
+Nodemon automatically restarts the server whenever file changes are detected.
+
+It’s used only in development to save time (no need to manually restart the server).
+
+HTTP vs Express:
+
+Without Express, we create routes manually using if-else conditions.
+
+With Express, we can easily use app.get(), app.post(), etc.
+
+Setup Steps:
+
+Initialize a new Node.js project
+Command: npm init -y
+
+Install Express
+Command: npm install express
+
+Install Nodemon (as a dev dependency)
+Command: npm install nodemon --save-dev
+
+Update package.json
+In the “scripts” section, add:
+"start": "node index.js",
+"dev": "nodemon index.js"
+
+Create index.js (main server file)
+Sample code:
+
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+res.send("Home Page");
+});
+
+app.get("/contact", (req, res) => {
+res.send("Contact Page");
+});
+
+app.listen(port, () => {
+console.log(Server running on port ${port});
+});
+
+Run the server
+Command: npm run dev
+(Nodemon will auto-restart when you save changes)
+
+Files in This Folder:
+
+index.js
+
+Main file where the Express server is created.
+
+Contains routes for "/" and "/contact".
+
+package.json
+
+Holds project details and scripts for running the app.
+
+Includes dependencies for express and nodemon.
+
+Output:
+
+Running the server prints:
+“Server running on port 3000” in the terminal.
+
+Visiting in browser:
+http://localhost:3000
+ → shows “Home Page”
+http://localhost:3000/contact
+ → shows “Contact Page”
+
+Notes:
+
+Express simplifies handling HTTP requests compared to Node’s built-in http module.
+
+Nodemon is for development only — not used in production.
+
+Always check the terminal output for any port errors (e.g., port already in use).
+
+This setup is the base for all future backend development (APIs, Middleware, MongoDB, etc.).

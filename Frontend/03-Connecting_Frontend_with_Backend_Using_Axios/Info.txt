@@ -1,0 +1,57 @@
+📄 Frontend (03-Connecting_Frontend_With_Backend.txt)
+
+Purpose:
+This folder demonstrates how to connect the React frontend with the Node/Express backend using Axios for HTTP requests.
+It helps verify communication between both parts of the MERN stack.
+
+🧠 Concepts Learned:
+
+Axios
+
+A promise-based HTTP client used in React to send API requests to the backend.
+
+Installed using:
+
+npm install axios
+
+
+Connecting to Backend
+
+The React app (running on http://localhost:5173) makes a request to the backend server (running on http://localhost:3000).
+
+Axios is used to call backend routes such as /, /api, etc.
+
+Data Flow
+
+React sends a request → Express server responds → Data logged or displayed in frontend.
+
+⚙️ Setup Steps:
+
+File: src/App.jsx
+
+import './App.css';
+import axios from "axios";
+
+function App() {
+
+  // Sending GET request to backend
+  axios.get("http://localhost:3000/").then((res) => {
+    console.log(res.data);
+  });
+
+  return (
+    <>
+      <h1>This is Frontend</h1>
+    </>
+  );
+}
+
+export default App;
+
+✅ Result:
+
+When the frontend runs, it sends a GET request to the backend.
+
+The backend responds with a message (e.g., “Backend Working Fine!”).
+
+The response is shown in the browser console.

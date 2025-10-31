@@ -1,0 +1,131 @@
+02 - Setting Up a Server with Express
+
+Purpose:
+This folder explains how to create a simple backend server using both the built-in Node.js HTTP module and the Express framework.
+The goal is to understand the difference between a manual HTTP server and an Express-based server, and how Express makes routing easier and cleaner.
+
+Concepts Learned:
+
+Creating a Server with Node’s HTTP Module:
+
+The http module is built into Node.js and allows you to create a web server manually.
+
+You must handle routes (like "/", "/contact", "/about") using if-else conditions.
+
+You must manually end the response using res.end().
+
+Creating a Server with Express:
+
+Express is built on top of the http module but provides a much simpler and cleaner syntax.
+
+Instead of checking routes manually, you can use built-in routing methods such as app.get() and app.post().
+
+Express also provides res.send() which automatically sets headers and ends the response.
+
+Benefits of Using Express:
+
+Easier route handling.
+
+Automatically sets headers and ends responses.
+
+More readable and scalable code.
+
+Supports middleware and external packages easily.
+
+Setup Steps:
+
+Import Express
+const express = require("express");
+
+Create an app instance
+const app = express();
+
+Define a port number
+const port = 3000;
+
+Create routes
+app.get("/", (req, res) => {
+res.send("Home");
+});
+
+app.get("/contact", (req, res) => {
+res.send("Contact");
+});
+
+app.get("/about", (req, res) => {
+res.send("About");
+});
+
+Start the server
+app.listen(port, () => {
+console.log(app listening on port ${port});
+});
+
+Run the server
+Command: npm run dev
+(Uses nodemon for auto-restart)
+
+Code Summary:
+
+// Using Node’s http module
+const http = require("http");
+const port = 3000;
+const server = http.createServer((req, res) => {
+if (req.url === "/") {
+res.end("Home");
+} else if (req.url === "/contact") {
+res.end("Contact");
+} else if (req.url === "/about") {
+res.end("About");
+} else {
+res.end("404");
+}
+});
+server.listen(port, () => {
+console.log(Server listening on port ${port});
+});
+
+Code Summary (Using Express):
+
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+res.send("Home");
+});
+
+app.get("/contact", (req, res) => {
+res.send("Contact");
+});
+
+app.get("/about", (req, res) => {
+res.send("About");
+});
+
+app.listen(port, () => {
+console.log(app listening on port ${port});
+});
+
+Output:
+
+Server starts successfully and logs:
+“app listening on port 3000” in the terminal.
+
+Visit in browser:
+http://localhost:3000
+ → shows “Home”
+http://localhost:3000/contact
+ → shows “Contact”
+http://localhost:3000/about
+ → shows “About”
+
+Notes:
+
+Express simplifies server creation and routing compared to Node’s http module.
+
+You can also send HTML directly using res.send("<h1>Home</h1>").
+
+This structure forms the foundation for building APIs and connecting a frontend (React) with a backend.
+
+In the next steps, middleware and API routes will be added for dynamic data handling.
