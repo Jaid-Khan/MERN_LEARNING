@@ -1,0 +1,135 @@
+/* Main title */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 32px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Task list area */
+.all_tasks {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Each individual task */
+.individual_task {
+  background: #f4f4f4;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border-left: 5px solid #4caf50;
+  font-size: 18px;
+  color: #333;
+  transition: 0.2s ease;
+  position: relative;
+  text-transform: capitalize;
+}
+
+.individual_task_completed {
+  background: #4caf50;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border-left: 5px solid #4caf50;
+  font-size: 18px;
+  color: #333;
+  transition: 0.2s ease;
+  position: relative;
+  text-transform: capitalize;
+}
+
+/* Hover effect on tasks */
+.individual_task:hover {
+  background: #e9e9e9;
+  cursor: pointer;
+}
+
+/* Bottom input + button section */
+.bottom-section {
+  width: 90%;
+  max-width: 600px;
+  margin: 25px auto;
+  display: flex;
+  gap: 10px;
+}
+
+/* Input box */
+.bottom-section input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+}
+
+.bottom-section input:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+/* Add Task button */
+.bottom-section button {
+  padding: 12px 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 17px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Hover effect */
+.bottom-section button:hover {
+  background-color: #43a047;
+}
+
+.done{
+    height: 18px;
+    width: 18px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.un_done{
+    height: 18px;
+    width: 18px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.delete{
+   height: 18px;
+    width: 18px;
+    background-color: #ec3030;
+    border-radius: 50%;
+    padding: 1px;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
