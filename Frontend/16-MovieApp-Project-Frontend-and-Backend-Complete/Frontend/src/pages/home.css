@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: burlywood;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.all-movies {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.indi_movies {
+  height: 200px;
+  width: 200px;
+  background-color: rgb(70, 184, 181);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  position: relative;
+  box-shadow: 2px 2px 10px 1px black;
+}
+
+.heart-icon {
+  height: 30px;
+  width: 30px;
+  /* background-color: red; */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.heart-icon:hover path {
+  fill: red;
+}
