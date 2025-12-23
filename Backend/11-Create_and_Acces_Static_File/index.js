@@ -1,0 +1,19 @@
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+    res.send("This is Home Page");
+});
+
+app.get("/about", (req, res) => {
+    res.send("This is About Page");
+});
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});

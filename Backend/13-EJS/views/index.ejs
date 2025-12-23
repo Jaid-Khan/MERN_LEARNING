@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Defines character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Makes the page responsive on all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title shown in browser tab -->
+    <title>Home Page</title>
+
+    <!-- Linking static CSS file from public folder -->
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+
+    <!-- Main heading of the page -->
+    <h1>Home</h1>
+
+    <!-- 
+        EJS Scriptlet Block
+        Used to write JavaScript logic (NO HTML output)
+        Here we declare variables and calculate their sum
+    -->
+    <% 
+        let a = 20; 
+        let b = 30; 
+        let ans = a + b; 
+    %>
+
+    <!-- 
+        EJS for loop
+        This loop runs from 0 to 100
+        It prints "Tony Stark" 101 times on the page
+    -->
+    <% for (let i = 0; i <= 100; i++) { %>
+        Tony Stark <br>
+    <% } %>
+
+    <!-- 
+        Printing dynamic data received from backend (Express)
+        <%= %> is used to OUTPUT values into HTML
+    -->
+    <h3>
+        Name: <%= name %> <br>
+        Age: <%= age %> <br>
+        Gender: <%= gender %>
+    </h3>
+
+    <!-- 
+        Displaying the calculated answer
+        This value was computed inside EJS logic block
+    -->
+    <h2>Answer: <%= ans %></h2>
+
+    <!-- Navigation links handled by Express routes -->
+    <nav><a href="/contact">Contact</a></nav>
+    <nav><a href="/about">About</a></nav>
+
+</body>
+</html>
