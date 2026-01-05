@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="shortener.css" />
+  <title>Shortened URL</title>
+</head>
+<body>
+  <h1>Shortened URL</h1>
+
+  <div class="shortened-url">
+    <p id="shortUrl"><%= shortUrl %></p>
+    <button onclick="copyUrl()">Copy</button>
+  </div>
+
+  <script>
+    function copyUrl() {
+      const urlText = document.getElementById("shortUrl").innerText;
+
+      navigator.clipboard.writeText(urlText)
+        .then(() => {
+          alert("URL copied to clipboard!");
+        })
+        .catch(err => {
+          console.error("Failed to copy:", err);
+        });
+    }
+  </script>
+</body>
+</html>
