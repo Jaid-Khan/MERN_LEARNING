@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>User Management</h1>
+
+    <!-- CREATE USER -->
+    <section>
+      <h2>Create User</h2>
+      <form action="/submit" method="get">
+        <input type="text" name="name" placeholder="Enter name" />
+        <input type="password" name="password" placeholder="Enter password" />
+        <button>Create</button>
+      </form>
+    </section>
+
+    <!-- FIND USER -->
+    <section>
+      <h2>Find User</h2>
+      <form action="/find" method="get">
+        <input type="text" name="name" placeholder="Enter name to find" />
+        <button>Find</button>
+      </form>
+    </section>
+
+    <!-- UPDATE USER -->
+    <section>
+      <h2>Update User</h2>
+      <form action="/update" method="get">
+        <input type="text" name="name" placeholder="Enter existing name" />
+        <input type="password" name="password" placeholder="Enter new password" />
+        <button>Update</button>
+      </form>
+    </section>
+
+    <!-- DELETE USER -->
+    <section class="danger">
+      <h2>Delete User</h2>
+      <form action="/delete" method="get">
+        <input type="text" name="name" placeholder="Enter name to delete" />
+        <button>Delete</button>
+      </form>
+    </section>
+
+  </div>
+
+</body>
+</html>
