@@ -1,0 +1,254 @@
+/* =======================
+   Reset
+======================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* =======================
+   Page Heading
+======================= */
+.Heading {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #000;
+  margin: 25px 60px;
+  text-align: left;
+}
+
+/* =======================
+   Notes Grid
+======================= */
+.all_notes {
+  padding: 10px 60px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+/* =======================
+   Note Card
+======================= */
+.inid_notes {
+  background: #f5b4b1;
+  border-radius: 10px;
+  padding: 16px;
+  min-height: 230px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.inid_notes:hover {
+  transform: translateY(-4px);
+}
+
+.svg-container{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+/* Edit Icon */
+.inid_notes edit-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.inid_notes delete-icon{
+  position: absolute;
+  top: 12px;
+  right: 30px;
+}
+
+
+/* Note Title */
+.inid_notes h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+/* Divider */
+.horizontal_line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.25);
+  margin-bottom: 10px;
+}
+
+/* Note Text */
+.inid_notes p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #222;
+}
+
+/* =======================
+   Add Note Card
+======================= */
+.add_notes_indi {
+  background: #f5b4b1;
+  border-radius: 10px;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.add_notes_indi svg {
+  width: 28px;
+  height: 28px;
+}
+
+.add_notes_indi h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* =======================
+   Full Screen Overlay
+======================= */
+.container {
+  position: fixed;          /* important */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;            /* full screen */
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add Note Modal – Sticky Note Style */
+.add_note {
+  width: 400px;
+  min-height: 160px;
+  background: #f5b4b1; /* same pink as notes */
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Modal Title */
+.add_note h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Divider */
+.add_note .horizontal_line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Input & Textarea */
+.add_note input,
+.add_note textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  resize: none;
+}
+
+/* Placeholder */
+.add_note input::placeholder,
+.add_note textarea::placeholder {
+  color: #333;
+  opacity: 0.7;
+}
+
+/* Buttons */
+.add_note .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Save Button */
+.add_note button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.add_note button:hover {
+  opacity: 0.85;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .add_note {
+    width: 90%;
+  }
+}
+
+/* =======================
+   Responsive
+======================= */
+@media (max-width: 768px) {
+  .Heading {
+    margin: 20px;
+    font-size: 2rem;
+  }
+
+  .all_notes {
+    padding: 10px 20px;
+  }
+
+  .add_note {
+    width: 90%;
+  }
+}
+
+
+.close_btn {
+  position: absolute;   /* anchor to modal */
+  top: -12px;           /* slightly outside top */
+  right: -12px;         /* slightly outside right */
+  cursor: pointer;
+
+  height: 32px;
+  width: 32px;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.close_btn:hover {
+  transform: scale(1.1);
+  background-color: #f2f2f2;
+}
