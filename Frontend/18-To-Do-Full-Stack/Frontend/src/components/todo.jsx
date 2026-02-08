@@ -1,55 +1,161 @@
+// Import React core library (needed to define React components)
 import React from "react";
+
+// Import CSS file for styling the Todo component
 import "./todo.css";
+
+// Import React hooks:
+// useState → manage component state
+// useEffect → run side effects (API calls)
+// useRef → access DOM elements directly
 import { useState, useEffect, useRef } from "react";
+
+// Import axios for making HTTP requests to backend APIs
 import axios from "axios";
 
+// Todo functional component
 function Todo() {
+
+  // State to control visibility of Add/Edit Note modal
   const [addNote, setAddNote] = useState(false);
+
+  // State to store all notes fetched from backend
   const [all_jobs, setAllJobs] = useState([]);
+
+  // State to check whether user is editing an existing note
+  const [editNote, setEditNote] = useState(false);
+
+  // State to store the ID of the note being edited
+  const [editId, setEditId] = useState("");
+
+  // useRef to access title input field value directly
   const job_title = useRef();
+
+  // useRef to access description textarea value directly
   const job_desc = useRef();
 
+  // useEffect runs once when component mounts
   useEffect(() => {
+
+    // Fetch all notes from backend
     axios.get("http://localhost:3000/jobs").then((response) => {
+
+      // Save response data into state
       setAllJobs(response.data);
     });
-  }, []);
+  }, []); // Empty dependency array → runs only once
 
+  // Function to fetch notes again (used after add/edit/delete)
   function getNotes() {
+
+    // Close add/edit modal
     setAddNote(false);
+
+    // Fetch updated notes list
     axios.get("http://localhost:3000/jobs").then((response) => {
+
+      // Update notes state
       setAllJobs(response.data);
     });
   }
 
-  function save_Note() {
-    let jT = job_title.current.value;
-    let jD = job_desc.current.value;
+  // Function called when edit icon is clicked
+  function editNoteFunc(item) {
+
+    // Open add/edit modal
+    setAddNote(true);
+
+    // Enable edit mode
+    setEditNote(true);
+
+    // Store selected note ID
+    setEditId(item._id);
+
+    // setTimeout ensures DOM is ready before assigning values
+    setTimeout(() => {
+
+      // Fill input with existing title
+      job_title.current.value = item.job;
+
+      // Fill textarea with existing description
+      job_desc.current.value = item.desc;
+    }, 0);
+  }
+
+  // Function to delete a note
+  function deleteNote(id) {
+
+    // Send DELETE request with note ID
     axios
-      .post("http://localhost:3000/jobs", {
-        job: jT,
-        desc: jD,
+      .delete("http://localhost:3000/jobs", {
+
+        // Axios delete requires data inside config object
+        data: { id: id },
       })
       .then(() => {
+
+        // Refresh notes after deletion
         getNotes();
       });
   }
 
-  function deleteNote(id) {
-    // console.log(id);
-    axios.delete("http://localhost:3000/jobs", {
-      data:{ id: id }
-    }).then(() => {
-      getNotes();
-    });
+  // Function to save note (add or update)
+  function save_Note() {
+
+    // Read title value from input using ref
+    let jT = job_title.current.value;
+
+    // Read description value from textarea using ref
+    let jD = job_desc.current.value;
+
+    // If edit mode is active → update note
+    if (editNote) {
+
+      // Send PUT request to update note
+      axios
+        .put("http://localhost:3000/jobs", {
+          id: editId, // Note ID
+          job: jT,    // Updated title
+          desc: jD,   // Updated description
+        })
+        .then(() => {
+
+          // Disable edit mode
+          setEditNote(false);
+
+          // Refresh notes
+          getNotes();
+        });
+    } 
+    // Else → create new note
+    else {
+
+      // Send POST request to create note
+      axios
+        .post("http://localhost:3000/jobs", {
+          job: jT,   // New note title
+          desc: jD,  // New note description
+        })
+        .then(() => {
+
+          // Refresh notes
+          getNotes();
+        });
+    }
   }
 
+  // JSX returned by component
   return (
     <>
+      {/* Show add/edit modal only when addNote is true */}
       {addNote == false ? null : (
         <div className="container">
           <div className="add_note">
+
+            {/* Close modal button */}
             <div onClick={() => setAddNote(false)} className="close_btn">
+
+              {/* SVG close icon (UI only, no logic) */}
               <svg
                 fill="#000000"
                 height={20}
@@ -69,21 +175,31 @@ function Todo() {
                 </g>
               </svg>
             </div>
+
+            {/* Input field for note title */}
             <input type="text" ref={job_title} placeholder="Title here..." />
+
+            {/* Textarea for note description */}
             <textarea
               ref={job_desc}
               name="textarea"
               id="textarea"
               placeholder="Content goes here..."
             ></textarea>
+
+            {/* Save button */}
             <button onClick={save_Note}>Add Note</button>
           </div>
         </div>
       )}
 
+      {/* Page heading */}
       <h1 className="Heading">My Notes</h1>
+
+      {/* Notes container */}
       <div className="all_notes">
-        {/* ADD NOTE BUTTON  */}
+
+        {/* Add note button */}
         <div onClick={() => setAddNote(true)} className="add_notes_indi">
           <svg
             viewBox="0 0 24 24"
@@ -117,13 +233,20 @@ function Todo() {
           <h2>Add Note</h2>
         </div>
 
-        {/* NOTES  */}
-
+        {/* Render all notes */}
         {all_jobs.map((item, index) => {
           return (
             <div key={index} className="inid_notes">
+
               <div className="svg-container">
-                <div className="edit-icon">
+
+                {/* Edit icon */}
+                <div
+                  className="edit-icon"
+                  onClick={() => {
+                    editNoteFunc(item);
+                  }}
+                >
                   <svg
                     viewBox="0 0 20 20"
                     height={20}
@@ -148,8 +271,14 @@ function Todo() {
                   </svg>
                 </div>
 
-                <div className="delete-icon" onClick={()=>{deleteNote(item._id)}}>
-                  <svg 
+                {/* Delete icon */}
+                <div
+                  className="delete-icon"
+                  onClick={() => {
+                    deleteNote(item._id);
+                  }}
+                >
+                  <svg
                     height={20}
                     width={20}
                     viewBox="0 0 24 24"
@@ -203,8 +332,14 @@ function Todo() {
                   </svg>
                 </div>
               </div>
+
+              {/* Note title */}
               <h2>{item.job}</h2>
+
+              {/* Divider */}
               <div className="horizontal_line"></div>
+
+              {/* Note description */}
               <p>{item.desc}</p>
             </div>
           );
@@ -214,4 +349,5 @@ function Todo() {
   );
 }
 
+// Export component for use in other files
 export default Todo;
