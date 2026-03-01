@@ -1,37 +1,111 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
-const session = require('express-session');
-app.set('view engine', 'ejs');
+const mongoose = require("mongoose");
+const session = require("express-session");
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connecting database 
-mongoose.connect('mongodb://localhost:27017/cookies_sessions_jwt').then(() => {
-    console.log('Connected to MongoDB');
-}).catch((err) => {
-    console.error('Error connecting to MongoDB', err);
+// Connecting database
+mongoose
+  .connect("mongodb://localhost:27017/authentication")
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB", err);
+  });
+
+// Mongoose Schema
+const userSchema = new mongoose.Schema({
+  name: String,
+  contact: Number,
+  password: String,
+  token: String,
 });
 
-// Setting up Session 
-app.use(session({
-    secret:"zeroid@12321",
-    saveUninitialized:false,
-    resave:false,
-    cookie:{
-        httpOnly:true,
-        maxAge:1000*60*60*24 // 1 day
+// Mongoose Model
+const User = mongoose.model("Users", userSchema);
+
+// Setting up Session
+app.use(
+  session({
+    secret: "zeroid@12321",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
-}))
+  }),
+);
 
+// Random String Generator
+function generateRandomString(length) {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
 
-// Handling Routes 
-app.get('/', (req, res) => {
-    res.render('index');
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters[randomIndex];
+  }
+
+  return result;
+}
+
+// Handling Routes
+app.get("/", (req, res) => {
+  console.log(req.session);
+  res.send("This is Home");
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
-// Listening Server 
+app.post("/login", async (req, res) => {
+  const user = await User.findOne({ contact: req.body.contact });
+  if (user == undefined || null) {
+    res.send("User not found");
+  } else {
+    let token = generateRandomString(12);
+    await User.updateOne({ contact: req.body.contact }, { token: token });
+    req.session.user = token;
+    console.log(req.session);
+  }
+  res.send(`Login successful ${user.name}`);
+});
+
+app.get("/profile", async (req, res) => {
+  if (req.session.user != undefined) {
+    const tokenValidate = await User.findOne({ token: req.session.user });
+    if (tokenValidate != undefined) {
+      res.send("This is Profile");
+    } else {
+      res.redirect("/login");
+    }
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+app.post("/signup", async (req, res) => {
+  const user = await User.create({
+    name: req.body.name,
+    contact: req.body.contact,
+    password: req.body.password,
+  });
+
+  console.log(user);
+  res.send("User Created Successfully");
+});
+
+// Listening Server
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+  console.log("Server is running on port 3000");
 });
