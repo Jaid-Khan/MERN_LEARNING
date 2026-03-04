@@ -3,6 +3,9 @@ const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 app.set("view engine", "ejs");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -66,28 +69,46 @@ app.get("/login", (req, res) => {
 
 app.post("/login", async (req, res) => {
   const user = await User.findOne({ contact: req.body.contact });
-  if (user == undefined || null) {
+  if (user == undefined || user == null) {
     res.send("User not found");
   } else {
-    let token = generateRandomString(12);
-    await User.updateOne({ contact: req.body.contact }, { token: token });
-    req.session.user = token;
-    console.log(req.session);
+    // let token = generateRandomString(12);
+    // await User.updateOne({ contact: req.body.contact }, { token: token });
+    // req.session.user = token;
+
+    const EncryptedToke = jwt.sign({ user: user._id }, "Zeroid@12321");
+    res.cookie("token", EncryptedToke, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    });
+    // res.cookie("user", token, {
+    //   httpOnly: true,
+    //   maxAge: 1000 * 60 * 60 * 24, // 1 day
+    // });
+    // console.log(req.session);
   }
+  console.log(req.cookies.token);
   res.send(`Login successful ${user.name}`);
 });
 
 app.get("/profile", async (req, res) => {
-  if (req.session.user != undefined) {
-    const tokenValidate = await User.findOne({ token: req.session.user });
-    if (tokenValidate != undefined) {
-      res.send("This is Profile");
-    } else {
-      res.redirect("/login");
-    }
-  } else {
-    res.redirect("/login");
-  }
+  console.log(req.cookies.token);
+  const decryptedToken = jwt.verify(req.cookies.token, "Zeroid@12321");
+  console.log(decryptedToken);
+
+  // if (req.session.user != undefined) {
+  //   if (req.cookies.user != undefined) {
+  // const tokenValidate = await User.findOne({ token: req.session.user });
+  //     const tokenValidate = await User.findOne({ token: req.cookies.user });
+  //     if (tokenValidate != undefined) {
+  //       res.send("This is Profile");
+  //     } else {
+  //       res.redirect("/login");
+  //     }
+  //   } else {
+  //     res.redirect("/login");
+  //   }
+  res.send("This is Profile");
 });
 
 app.get("/signup", (req, res) => {
