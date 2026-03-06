@@ -76,8 +76,8 @@ app.post("/login", async (req, res) => {
     // await User.updateOne({ contact: req.body.contact }, { token: token });
     // req.session.user = token;
 
-    const EncryptedToke = jwt.sign({ user: user._id }, "Zeroid@12321");
-    res.cookie("token", EncryptedToke, {
+    const EncryptedToken = jwt.sign({ user: user._id }, "Zeroid@12321");
+    res.cookie("token", EncryptedToken, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     });
