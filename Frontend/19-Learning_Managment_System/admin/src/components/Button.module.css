@@ -1,0 +1,17 @@
+
+.menuBtn{
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.menuBtn:hover{
+  background-color: #334155;
+  border-radius: 5px;
+}
