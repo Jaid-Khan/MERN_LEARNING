@@ -10,6 +10,7 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<Login />} /> */}
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </DataContext.Provider>
     </BrowserRouter>

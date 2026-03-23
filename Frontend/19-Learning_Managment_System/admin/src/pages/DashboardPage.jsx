@@ -1,9 +1,29 @@
 import styles from "./DashboardPage.module.css";
 import Button from "../components/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function DashboardPage() {
-  const [activeSection, setActiveSection] = useState("dashboard");
+  const [activeSection, setActiveSection] = useState("Dashboard");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  axios.post(
+    "http://localhost:3000/admin/auth/check-session",
+    {},
+    { withCredentials: true }
+  )
+  .then((res) => {
+    if (res.data.res === false) {
+      navigate("/login");
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}, []);
 
   return (
     <div className={styles.container}>
