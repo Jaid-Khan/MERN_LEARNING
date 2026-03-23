@@ -5,7 +5,7 @@ auth.get("/",(req, res)=>{
     res.send("This is Student Auth Home Route");
 })
 
-auth.post("/login",(req, res)=>{
+auth.get("/login",(req, res)=>{
     res.send("This is Student Login Route");
 })
 
