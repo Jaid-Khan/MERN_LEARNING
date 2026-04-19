@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/signup.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>This is User Signup Page</h1>
+    <form action="/signup" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="name" required><br>
+        <input type="email" name="email" placeholder="email" required><br>
+        <input type="number" name="contact" placeholder="contact" required><br>
+        <input type="password" name="password" placeholder="password" required><br>
+        <label for="profile">Profile Image</label>
+        <input type="file" accept=".jpeg, .jpg, .png" name="profile" id="profile" required> <br>
+        <input type="radio" name="gender" value="male">Male <br>
+        <input type="radio" name="gender" value="female">Female <br>
+        <input type="radio" name="gender" value="other">Other <br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
