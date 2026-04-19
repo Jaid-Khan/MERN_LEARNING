@@ -14,6 +14,7 @@ async function createUser(name, email, contact, hashedPassword, profile, gender,
 
 async function read(key, value){
     let user = await Users.findOne({[key]:value})    
+    // console.log(user)
     return user;
 }
 

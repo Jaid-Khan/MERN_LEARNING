@@ -6,7 +6,12 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>This is User Login Page</h1>
+    <h1>Login </h1>
+    <form action="/login" method="post">
+        <input type="number" name="contact" placeholder="contact" id="">
+        <input type="password" name="password" placeholder="password" id="">
+        <input type="submit" value="Submit">
+    </form>
     <script>
       fetch("/check-token",{
         method:"POST"
@@ -15,7 +20,10 @@
           return res.json();
         })
         .then((data) => {
-          console.log(data);
+        //   console.log(data);
+        if(data.res == true){
+            window.location.href = "/";
+        }
         });
     </script>
   </body>
